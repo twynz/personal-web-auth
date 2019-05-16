@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: auth-server
+
+server:
+  port: 10001
+
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:18801/eureka/
