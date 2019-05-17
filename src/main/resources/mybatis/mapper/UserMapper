@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myweb.auth.dao.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.myweb.auth.entity.User">
+        <id column="id" typeHandler="UUIDTypeHandler" property="userId"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" parameterType="UUID" resultMap="BaseResultMap">
+        select
+        u.userId,
+        u.password,
+        u.username
+        from
+        myuser u
+        where u.id = #{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="UUID">
+        DELETE FROM myuser
+        WHERE id = #{id,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
+    </delete>
+    <insert id="insert" parameterType="com.myweb.auth.entity.User">
+        INSERT INTO user (userId, password, username)
+        VALUES (#{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}, #{password,jdbcType=VARCHAR},
+                #{username,jdbcType=VARCHAR});
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.myweb.auth.entity.User">
+        UPDATE myuser
+        SET myuser = #{username,jdbcType=VARCHAR}, description = #{password,jdbcType=VARCHAR}
+        WHERE id = #{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
+    </update>
+
+</mapper>
