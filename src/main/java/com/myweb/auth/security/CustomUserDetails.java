@@ -16,11 +16,11 @@ public class CustomUserDetails implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(String username, String password, String tenantId, String userId) {
+    public CustomUserDetails(String username, String password, String userId, Collection<? extends GrantedAuthority> authorities) {
         this.username = username;
         this.password = password;
         this.userId = userId;
-        authorities = null;
+        this.authorities = authorities;
     }
 
     public String getUserId() {

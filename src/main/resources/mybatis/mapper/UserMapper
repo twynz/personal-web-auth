@@ -29,5 +29,13 @@
         SET myuser = #{username,jdbcType=VARCHAR}, description = #{password,jdbcType=VARCHAR}
         WHERE id = #{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
     </update>
-
+    <select id="selectByUsername" parameterType="String" resultMap="BaseResultMap">
+        select
+        u.userId,
+        u.password,
+        u.username
+        from
+        myuser u
+        where u.username = #{username,jdbcType=VARCHAR}
+    </select>
 </mapper>

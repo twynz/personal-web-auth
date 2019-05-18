@@ -17,4 +17,6 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User user);
 
+    User selectByUsername(@Param("username") String username);
+
 }

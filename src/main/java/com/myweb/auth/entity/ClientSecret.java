@@ -1,7 +1,5 @@
 package com.myweb.auth.entity;
 
-import java.util.UUID;
-
 public class ClientSecret extends BaseEntity {
     private String clientId;
     private String clientSecret;

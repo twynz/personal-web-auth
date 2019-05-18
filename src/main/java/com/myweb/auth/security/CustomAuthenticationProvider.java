@@ -1,46 +1,58 @@
 package com.myweb.auth.security;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import com.auth0.jwt.internal.org.apache.commons.lang3.StringUtils;
 
+import com.myweb.auth.dao.UserDAO;
+import com.myweb.auth.dao.UserPermissionDAO;
+import com.myweb.auth.entity.User;
+import com.myweb.auth.entity.UserPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
-//    @Autowired
-//    private UserClient userClient;
+    @Autowired
+    private UserDAO userDAO;
+
+    @Autowired
+    private UserPermissionDAO userPermissionDAO;
 
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
-
-        //authentication logic here, will check username from db.
-        Map map = null;
-        String tenantId = (String) map.get("tenantId");
-        String userId = (String) map.get("userId");
-
-        if (StringUtils.isEmpty(tenantId) || StringUtils.isEmpty(userId)) {
-            throw new BadCredentialsException("Invalid username or password.");
-        }
-
-        CustomUserDetails customUserDetails = new CustomUserDetails(username, password, tenantId, userId);
-
+        //check username and password.
+        User user = checkUserAndReturn(username, password);
+        List<SimpleGrantedAuthority> grantedAuthorityList = getUserAuthorities(user);
+        CustomUserDetails customUserDetails = new CustomUserDetails(username, password,
+                user.getUserId().toString(), grantedAuthorityList);
         return new CustomAuthenticationToken(customUserDetails);
     }
 
-    private Map<String, String> getUserServicePostObject(String username, String password) {
-        Map<String, String> requestParam = new HashMap<String, String>();
-        requestParam.put("userName", username);
-        requestParam.put("password", password);
-        return requestParam;
+    private User checkUserAndReturn(String username, String password) {
+        User user = userDAO.selectByUsername(username);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        } else {
+            throw new BadCredentialsException("Invalid username or password.");
+        }
+
+    }
+
+    private List<SimpleGrantedAuthority> getUserAuthorities(User user) {
+        UUID userId = user.getUserId();
+        List<UserPermission> userPermissionList = userPermissionDAO.selectByUserId(userId);
+        List<SimpleGrantedAuthority> grantedAuthorityList = new ArrayList<>();
+        userPermissionList.stream().
+                map(item -> new SimpleGrantedAuthority(item.getPermission())).forEachOrdered(grantedAuthorityList::add);
+        return grantedAuthorityList;
     }
 
     @Override

@@ -1,15 +1,14 @@
 package com.myweb.auth.service;
 
-import java.util.List;
-import java.util.UUID;
-
-import com.google.common.collect.Lists;
 import com.myweb.auth.dao.ClientSecretDAO;
 import com.myweb.auth.dto.ApiClientDTO;
 import com.myweb.auth.entity.ClientSecret;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+@Component
 public class ClientSecretService {
 
     @Autowired

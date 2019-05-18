@@ -1,11 +1,5 @@
 package com.myweb.auth.dto;
 
-import java.util.UUID;
-
-import javax.validation.constraints.NotNull;
-
-import net.sf.oval.constraint.NotBlank;
-
 public class ApiClientDTO {
 
     private String clientId;

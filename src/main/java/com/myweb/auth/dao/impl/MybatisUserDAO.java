@@ -57,6 +57,11 @@ public class MybatisUserDAO implements UserDAO {
     }
 
     @Override
+    public User selectByUsername(String username) {
+        return userMapper.selectByUsername(username);
+    }
+
+    @Override
     public void updateByPrimaryKey(User user) {
         userMapper.updateByPrimaryKey(user);
     }
