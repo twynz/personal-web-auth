@@ -4,10 +4,12 @@ import com.myweb.auth.dao.UserPermissionDAO;
 import com.myweb.auth.dao.mapper.UserPermissionMapper;
 import com.myweb.auth.entity.UserPermission;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public class MybatisUserPermissionDAO implements UserPermissionDAO {
 
     @Autowired

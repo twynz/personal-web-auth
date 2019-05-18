@@ -1,2 +1,36 @@
-spring.cloud.config.discovery.enabled: false
+spring:
+  datasource:
+    name: hikari1
+    username: ${USER_DB_PWD:porta}
+    password: ${USER_DB_USER:porta}
+    url: jdbc:mysql://${USER_DB_ADDRESS:localhost:3306}/auth?useUnicode=true&characterEncoding=utf-8&serverTimezone=Pacific/Auckland
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 50
+      connection-timeout: 30000
+      idle-timeout: 600000
+      minimum-idle: 50
+
+############################# Flyway Config ###########################
+flyway:
+  base-line-on-migrate: true
+  table: flyway_version
+  base-line-version: 1
+  skip-default-resolvers: false
+  locations: classpath:db.migrations
+  is-enable-flyway-migration: true
+  out-of-order: false
+  repair: false
+
+ribbon:
+  ReadTimeout: 30000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 20000
 
