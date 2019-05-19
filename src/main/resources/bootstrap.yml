@@ -8,6 +8,8 @@ spring:
   application:
     name: ${service.name}
   cloud:
+    config:
+      enabled: false
     consul:
       discovery:
         preferIpAddress: true

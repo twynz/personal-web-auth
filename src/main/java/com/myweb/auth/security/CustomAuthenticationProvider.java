@@ -29,10 +29,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
         //check username and password.
-        User user = checkUserAndReturn(username, password);
-        List<SimpleGrantedAuthority> grantedAuthorityList = getUserAuthorities(user);
+//        User user = checkUserAndReturn(username, password);
+
+        //for test
+        List<SimpleGrantedAuthority> grantedAuthorityList = getUserAuthorities(null);
         CustomUserDetails customUserDetails = new CustomUserDetails(username, password,
-                user.getUserId().toString(), grantedAuthorityList);
+                null, grantedAuthorityList);
         return new CustomAuthenticationToken(customUserDetails);
     }
 
@@ -47,12 +49,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     }
 
     private List<SimpleGrantedAuthority> getUserAuthorities(User user) {
-        UUID userId = user.getUserId();
-        List<UserPermission> userPermissionList = userPermissionDAO.selectByUserId(userId);
-        List<SimpleGrantedAuthority> grantedAuthorityList = new ArrayList<>();
-        userPermissionList.stream().
-                map(item -> new SimpleGrantedAuthority(item.getPermission())).forEachOrdered(grantedAuthorityList::add);
-        return grantedAuthorityList;
+//        UUID userId = user.getUserId();
+//        List<UserPermission> userPermissionList = userPermissionDAO.selectByUserId(userId);
+//        List<SimpleGrantedAuthority> grantedAuthorityList = new ArrayList<>();
+//        userPermissionList.stream().
+//                map(item -> new SimpleGrantedAuthority(item.getPermission())).forEachOrdered(grantedAuthorityList::add);
+        List<SimpleGrantedAuthority> simpleGrantedAuthorityList = new ArrayList<>();
+        simpleGrantedAuthorityList.add(new SimpleGrantedAuthority("client_secret_change"));
+        return simpleGrantedAuthorityList;
     }
 
     @Override

@@ -11,6 +11,7 @@ spring:
       idle-timeout: 600000
       minimum-idle: 50
 
+
 ############################# Flyway Config ###########################
 flyway:
   base-line-on-migrate: true

@@ -9,14 +9,7 @@ create table oauth_client_details (
   access_token_validity INTEGER,
   refresh_token_validity INTEGER,
   additional_information VARCHAR(4096),
-  autoapprove VARCHAR(255),
-  tenant_id VARCHAR(36),
-  status VARCHAR(255),
-  purpose VARCHAR(255),
-  create_time TIMESTAMP NULL DEFAULT NULL,
-  update_time TIMESTAMP NULL DEFAULT NULL,
-  create_by VARCHAR(36),
-  update_by VARCHAR(36)
+  autoapprove tinyint
 );
 
 create table oauth_client_token (
