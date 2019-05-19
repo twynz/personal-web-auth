@@ -16,7 +16,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
+//@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 @MapperScan("com.myweb.auth.dao.mapper")
 public class DataConfig {
 

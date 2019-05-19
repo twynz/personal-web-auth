@@ -1,26 +1,26 @@
 package com.myweb.auth.entity;
 
-import com.myweb.auth.utils.TimestampAdapter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.UUID;
-
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 8388417013613884409L;
 
-    @XmlJavaTypeAdapter(TimestampAdapter.class)
+    @JsonIgnore
     private Timestamp createTime;
 
-    @XmlJavaTypeAdapter(TimestampAdapter.class)
+    @JsonIgnore
     private Timestamp updateTime;
 
+    @JsonIgnore
     private UUID createBy;
 
+    @JsonIgnore
     private UUID updateBy;
 
     public Timestamp getCreateTime() {
@@ -53,6 +53,14 @@ public abstract class BaseEntity implements Serializable {
 
     public void setUpdateBy(UUID updateBy) {
         this.updateBy = updateBy;
+    }
+
+    public void populateCreation() {
+        this.setCreateTime(new Timestamp(System.currentTimeMillis()));
+    }
+
+    public void populateUpdate() {
+        this.setUpdateTime(new Timestamp(System.currentTimeMillis()));
     }
 
 }
