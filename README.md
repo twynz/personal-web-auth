@@ -8,7 +8,7 @@ should also add your user details in database.
 
 The format to get a token can use this command:
 
-     curl test:test@localhost:18100/oauthant_type=password -d username=twy -d password=twy
+     curl test:test@localhost:18100/oauth/token -d grant_type=password -d username=twy -d password=twy
 
 You will get a token like this:
      
@@ -20,6 +20,21 @@ You will get a token like this:
       "scope": "test"
     }
 
+To check whether the token is valid, use token endpoint /oauth/check_token
+
+    curl test:test@localhost:18100/oauth/check_token -d token=fe9806ec-b2ea-4fee-8c1e-e4d1a81183e7
+
+You will get info like this:
+
+   {
+      "exp": 1558347094,
+      "user_name": "twy",
+      "client_id": "test",
+      "scope": [
+         "test"
+      ]
+   }
+  
 To run this project:
 
 1. mvn clean install.
