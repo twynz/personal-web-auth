@@ -31,7 +31,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         //check username and password.
 //        User user = checkUserAndReturn(username, password);
 
-        //for test
+        //for testoauth_access_token
         List<SimpleGrantedAuthority> grantedAuthorityList = getUserAuthorities(null);
         CustomUserDetails customUserDetails = new CustomUserDetails(username, password,
                 null, grantedAuthorityList);
