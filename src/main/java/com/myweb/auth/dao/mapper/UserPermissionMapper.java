@@ -1,17 +1,17 @@
 package com.myweb.auth.dao.mapper;
 
 import com.myweb.auth.entity.UserPermission;
-
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 import java.util.UUID;
 
 public interface UserPermissionMapper {
 
-    List<UserPermission> selectByUserId(UUID userId);
+    List<UserPermission> selectByUserId(@Param("userId")UUID userId);
 
-    int deleteByUserId(UUID uuid);
+    int deleteByUserId(@Param("userId")UUID uuid);
 
-    int deleteByPermissionId(UUID uuid);
+    int deleteByPermissionId(@Param("permissionId")UUID uuid);
 
     int insert(UserPermission userPermission);
 

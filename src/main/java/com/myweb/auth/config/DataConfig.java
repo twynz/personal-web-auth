@@ -13,10 +13,11 @@ import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableTransactionManagement
 @Configuration
-//@EnableTransactionManagement(mode = AdviceMode.ASPECTJ)
 @MapperScan("com.myweb.auth.dao.mapper")
 public class DataConfig {
 
@@ -34,10 +35,17 @@ public class DataConfig {
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
-        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:/mybatis/config.xml"));
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/mapper/*Mapper.xml"));
+        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mybatis/config.xml"));
+        //todo it has problem recognizing *, need to check why.
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/**"));
 
         return sqlSessionFactoryBean.getObject();
+    }
+
+    @Bean
+    public DataSourceTransactionManager transactionManager()
+    {
+        return new DataSourceTransactionManager(dataSource());
     }
 
     @Bean

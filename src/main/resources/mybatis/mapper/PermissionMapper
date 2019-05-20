@@ -70,13 +70,4 @@
         WHERE id = #{id,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
     </update>
 
-
-    <select id="selectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
-        SELECT DISTINCT p.permission
-        FROM permission p
-            INNER JOIN role_permission rp ON p.id = rp.permission_id
-            INNER JOIN user_tenant_role utr ON utr.role_id = rp.role_id
-        WHERE utr.user_id = #{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
-              AND utr.tenant_id = #{tenantId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
-    </select>
 </mapper>

@@ -8,19 +8,19 @@
     </resultMap>
     <select id="selectByPrimaryKey" parameterType="UUID" resultMap="BaseResultMap">
         select
-        u.userId,
+        u.id,
         u.password,
         u.username
         from
         myuser u
-        where u.id = #{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
+        where u.id = #{id,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="UUID">
         DELETE FROM myuser
         WHERE id = #{id,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
     </delete>
     <insert id="insert" parameterType="com.myweb.auth.entity.User">
-        INSERT INTO user (userId, password, username)
+        INSERT INTO myuser (id, password, username)
         VALUES (#{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}, #{password,jdbcType=VARCHAR},
                 #{username,jdbcType=VARCHAR});
     </insert>
@@ -31,7 +31,7 @@
     </update>
     <select id="selectByUsername" parameterType="String" resultMap="BaseResultMap">
         select
-        u.userId,
+        u.id,
         u.password,
         u.username
         from

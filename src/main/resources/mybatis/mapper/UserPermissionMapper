@@ -24,7 +24,7 @@
   </delete>
 
     <delete id="deleteByPermissionId">
-    delete from user_tenant_role
+    delete from user_permission
     where permission_id = #{permissionId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}
   </delete>
 
@@ -32,20 +32,20 @@
     <insert id="insert" parameterType="com.myweb.auth.entity.UserPermission"
             useGeneratedKeys="true" keyProperty="id"
     >
-    insert into user_permission (user_id, permission_id,
+    insert into user_permission (user_id, permission_id
       ,permission)
     values (#{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler}, #{permissionId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler},
       #{permission,jdbcType=VARCHAR})
   </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.myweb.auth.entity.UserTenantRole">
+    <update id="updateByPrimaryKeySelective" parameterType="com.myweb.auth.entity.UserPermission">
         update user_permission
         <set>
             <if test="userId != null">
                 user_id = #{userId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler},
             </if>
             <if test="permissionId != null">
-                permission_id = #{tenantId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler},
+                permission_id = #{permissionId,javaType=UUID,jdbcType=OTHER,typeHandler=UUIDTypeHandler},
             </if>
             <if test="permission != null">
                 permission = #{permission,jdbcType=VARCHAR},

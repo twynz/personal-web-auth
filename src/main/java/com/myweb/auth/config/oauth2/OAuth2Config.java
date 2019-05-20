@@ -1,9 +1,11 @@
 package com.myweb.auth.config.oauth2;
 
+import com.myweb.auth.config.DataConfig;
 import com.myweb.auth.security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.GlobalAuthenticationConfigurerAdapter;
@@ -19,6 +21,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
+@Import({DataConfig.class})
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Autowired

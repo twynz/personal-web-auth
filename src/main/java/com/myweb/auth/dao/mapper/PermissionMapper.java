@@ -22,7 +22,7 @@ public interface PermissionMapper {
 
     int updateByPrimaryKey(Permission record);
 
-    List<Permission> selectByMap(UUID userId);
+    List<Permission> selectByMap(@Param("userId")UUID userId);
 
-    void updateName(UUID id, String newName);
+    void updateName(@Param("userId")UUID id, String newName);
 }
