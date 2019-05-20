@@ -29,10 +29,10 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
         //check username and password.
-//        User user = checkUserAndReturn(username, password);
+        User user = checkUserAndReturn(username, password);
 
         //for testoauth_access_token
-        List<SimpleGrantedAuthority> grantedAuthorityList = getUserAuthorities(null);
+        List<SimpleGrantedAuthority> grantedAuthorityList = getUserAuthorities(user);
         CustomUserDetails customUserDetails = new CustomUserDetails(username, password,
                 null, grantedAuthorityList);
         return new CustomAuthenticationToken(customUserDetails);
@@ -49,14 +49,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     }
 
     private List<SimpleGrantedAuthority> getUserAuthorities(User user) {
-//        UUID userId = user.getUserId();
-//        List<UserPermission> userPermissionList = userPermissionDAO.selectByUserId(userId);
-//        List<SimpleGrantedAuthority> grantedAuthorityList = new ArrayList<>();
-//        userPermissionList.stream().
-//                map(item -> new SimpleGrantedAuthority(item.getPermission())).forEachOrdered(grantedAuthorityList::add);
-        List<SimpleGrantedAuthority> simpleGrantedAuthorityList = new ArrayList<>();
-        simpleGrantedAuthorityList.add(new SimpleGrantedAuthority("client_secret_change"));
-        return simpleGrantedAuthorityList;
+        UUID userId = user.getUserId();
+        List<UserPermission> userPermissionList = userPermissionDAO.selectByUserId(userId);
+        List<SimpleGrantedAuthority> grantedAuthorityList = new ArrayList<>();
+        userPermissionList.stream().
+                map(item -> new SimpleGrantedAuthority(item.getPermission())).forEachOrdered(grantedAuthorityList::add);
+//        List<SimpleGrantedAuthority> simpleGrantedAuthorityList = new ArrayList<>();
+//        simpleGrantedAuthorityList.add(new SimpleGrantedAuthority("client_secret_change"));
+        return grantedAuthorityList;
     }
 
     @Override
