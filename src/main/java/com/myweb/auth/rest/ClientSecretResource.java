@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,8 +47,11 @@ public class ClientSecretResource {
     @RequestMapping(value = "/test", method = RequestMethod.GET, consumes = "application/json",
             produces = "application/json")
     @Description("test dao.")
+    @PreAuthorize("hasAuthority('test')")
     public ResponseEntity<Void> test() {
         userDAO.selectByUsername("twy");
+
+        SecurityContextHolder.getContext();
 
         User user = new User();
         user.setUserId(UUID.fromString("8e267f87-0807-4e57-96f9-e5a57249bb32"));
