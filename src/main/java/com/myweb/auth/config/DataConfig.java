@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.myweb.auth.dao.mapper")
 public class DataConfig {
 
-    @Bean
+    @Bean(destroyMethod = "")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create().build();

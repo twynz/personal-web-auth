@@ -40,21 +40,25 @@ public class SecurityContextFilter extends UsernamePasswordAuthenticationFilter 
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        try {
 
-        String username = request.getHeader(USERNAME);
+            String username = request.getHeader(USERNAME);
 
-        UserContext userContext = new UserContext();
-        userContext.setAuthorities(getAuthoritiesForCurrentUser(username));
-        userContext.setUsername(username);
+            UserContext userContext = new UserContext();
+            userContext.setAuthorities(getAuthoritiesForCurrentUser(username));
+            userContext.setUsername(username);
 
-        if (SecurityContextHolder.getContext() != null) {
-            SecurityContextHolder.clearContext();
+            if (SecurityContextHolder.getContext() != null) {
+                SecurityContextHolder.clearContext();
+            }
+
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userContext,
+                    null, userContext.getAuthorities());
+            userContext.setAuthentication(authentication);
+            SecurityContextHolder.setContext(userContext);
+        }catch(Exception e){
+
         }
-
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userContext,
-                null, userContext.getAuthorities());
-        userContext.setAuthentication(authentication);
-        SecurityContextHolder.setContext(userContext);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

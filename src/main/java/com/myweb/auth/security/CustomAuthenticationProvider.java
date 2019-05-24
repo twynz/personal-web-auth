@@ -11,6 +11,7 @@ import com.myweb.auth.entity.UserPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,9 +34,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
         //for testoauth_access_token
         List<SimpleGrantedAuthority> grantedAuthorityList = getUserAuthorities(user);
-        CustomUserDetails customUserDetails = new CustomUserDetails(username, password,
-                null, grantedAuthorityList);
-        return new CustomAuthenticationToken(customUserDetails);
+        return new UsernamePasswordAuthenticationToken(username, password, grantedAuthorityList);
     }
 
     private User checkUserAndReturn(String username, String password) {
