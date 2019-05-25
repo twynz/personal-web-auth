@@ -1,5 +1,5 @@
 server:
-  port: 18100
+  port: 10001
 
 service:
   name: auth
