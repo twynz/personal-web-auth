@@ -2,6 +2,7 @@ package com.myweb.auth.config.oauth2;
 
 import com.myweb.auth.config.DataConfig;
 import com.myweb.auth.security.CustomAuthenticationProvider;
+import com.myweb.auth.security.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,9 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private CustomUserDetailService userDetailsService;
+
+    @Autowired
     private DataSource dataSource;
 
     @Bean
@@ -52,7 +56,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager)
+        endpoints.authenticationManager(authenticationManager).userDetailsService(userDetailsService)
                 .tokenStore(tokenStore(dataSource));
     }
 
