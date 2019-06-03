@@ -8,7 +8,7 @@ should also add your user details in database.
 
 The format to get a token can use this command:
 
-     curl test:test@localhost:18100/oauth/token -d grant_type=password -d username=twy -d password=twy
+     curl test:test@localhost:10001/oauth/token -d grant_type=password -d username=twy -d password=twy
 
 You will get a token like this:
      
@@ -22,7 +22,7 @@ You will get a token like this:
 
 To check whether the token is valid, use token endpoint /oauth/check_token
 
-    curl test:test@localhost:18100/oauth/check_token -d token=fe9806ec-b2ea-4fee-8c1e-e4d1a81183e7
+    curl test:test@localhost:10001/oauth/check_token -d token=fe9806ec-b2ea-4fee-8c1e-e4d1a81183e7
 
 You will get info like this:
 
@@ -34,6 +34,23 @@ You will get info like this:
          "test"
       ]
    }
+   
+To use the refresh token to get a new access token:
+ 
+ curl test:test@localhost:10001/oauth/check_token -d refresh_token=a83d6ce1-198f-4974-89e2-32e3be52c364 -d grant_type refresh_token
+ 
+You will get a response like following:
+
+ {
+    "access_token": "d5a3b7e5-ea59-46ff-aa97-f34d9953bcca",
+    "token_type": "bearer",
+    "refresh_token": "a83d6ce1-198f-4974-89e2-32e3be52c364",
+    "expires_in": 43199,
+    "scope": "test"
+}
+
+To run this project. You need to:
+
   
 To run this project:
 
