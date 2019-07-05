@@ -26,28 +26,28 @@ To check whether the token is valid, use token endpoint /oauth/check_token
 
 You will get info like this:
 
-   {
+    {
       "exp": 1558347094,
       "user_name": "twy",
       "client_id": "test",
       "scope": [
          "test"
       ]
-   }
+    }
    
 To use the refresh token to get a new access token:
  
- curl test:test@localhost:10001/oauth/check_token -d refresh_token=a83d6ce1-198f-4974-89e2-32e3be52c364 -d grant_type refresh_token
+    curl test:test@localhost:10001/oauth/check_token -d refresh_token=a83d6ce1-198f-4974-89e2-32e3be52c364 -d grant_type refresh_token
  
 You will get a response like following:
 
- {
-    "access_token": "d5a3b7e5-ea59-46ff-aa97-f34d9953bcca",
-    "token_type": "bearer",
-    "refresh_token": "a83d6ce1-198f-4974-89e2-32e3be52c364",
-    "expires_in": 43199,
-    "scope": "test"
-}
+    {
+       "access_token": "d5a3b7e5-ea59-46ff-aa97-f34d9953bcca",
+       "token_type": "bearer",
+       "refresh_token": "a83d6ce1-198f-4974-89e2-32e3be52c364",
+       "expires_in": 43199,
+       "scope": "test"
+    }
 
 To run this project. You need to:
 
