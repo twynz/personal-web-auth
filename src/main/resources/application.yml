@@ -2,7 +2,7 @@ spring:
   datasource:
     name: test
     username: ${USER_DB_USER:root}
-    password: ${USER_DB_PWD:123}USER_DB_PWD
+    password: ${USER_DB_PWD:123}
     url: jdbc:mysql://${USER_DB_ADDRESS:localhost:3306}/auth?useUnicode=true&characterEncoding=utf-8&serverTimezone=Pacific/Auckland
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
