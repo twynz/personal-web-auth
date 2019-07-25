@@ -11,6 +11,9 @@ spring:
       idle-timeout: 600000
       minimum-idle: 50
 
+redis:
+  port: ${REDIS_PORT:6379}
+  hostname: ${REDIS_HOST_ADDRESS:localhost}
 
 ############################# Flyway Config ###########################
 flyway:

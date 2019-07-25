@@ -5,19 +5,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.cache.RedisCachePrefix;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.client.RestTemplate;
 
 @Configuration
-@PropertySource("application.properties")
+@PropertySource("application.yml")
 public class RedisConfig {
 
-    @Value("${spring.redis.hostname}")
+    @Value("${redis.hostname}")
     private String redisHostName;
 
-    @Value("${spring.redis.port}")
+    @Value("${redis.port}")
     private int redisPort;
 
     @Bean
@@ -30,17 +28,17 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<Object, Object> redisTemplate() {
-        RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<Object, Object>();
+    public RedisTemplate<String, String> redisTemplate() {
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(jedisConnectionFactory());
         return redisTemplate;
     }
 
-    @Bean
-    public RedisCacheManager cacheManager() {
-        RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate());
-        return redisCacheManager;
-    }
+//    @Bean
+//    public RedisCacheManager cacheManager() {
+//        RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate());
+//        return redisCacheManager;
+//    }
 }
 
 

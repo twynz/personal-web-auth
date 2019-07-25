@@ -27,7 +27,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .and()
                 .requestMatchers().antMatchers("/**")
                 .and().authorizeRequests()
-                .antMatchers("/auth/**","/health/**","/health","/info","/api/**").permitAll()
+                .antMatchers("/auth/**","/health/**","/health","/info","/api/**","/captcha/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(initSecurityContextFilter(), AnonymousAuthenticationFilter.class);
