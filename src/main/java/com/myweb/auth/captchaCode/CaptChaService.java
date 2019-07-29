@@ -20,7 +20,7 @@ public class CaptChaService {
     private RedisTemplate<String, String> redisTemplate;
 
     private static int verificationCodeExpiresTime = 5*60;
-    private static int captchaWidth = 200;
+    private static int captchaWidth = 120;
     private static int captchaHeight = 60;
 
     public String getCaptchaVerificationCode(String uuid) {
