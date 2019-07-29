@@ -13,7 +13,7 @@ spring:
 
 redis:
   port: ${REDIS_PORT:6379}
-  hostname: ${REDIS_HOST_ADDRESS:localhost}
+  hostname: ${REDIS_HOST_ADDRESS:vcode.ymuwjc.0001.apse2.cache.amazonaws.com}
 
 ############################# Flyway Config ###########################
 flyway:
