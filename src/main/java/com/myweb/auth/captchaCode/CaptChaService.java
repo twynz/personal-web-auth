@@ -41,6 +41,9 @@ public class CaptChaService {
 
 
     public boolean verifyCode(String uuid , String inputCode) {
+        if(uuid==null||inputCode==null) {
+            return false;
+        }
         String redisCodeValue = redisTemplate.opsForValue().get(uuid);
         if(redisCodeValue==null) {
             return false;
