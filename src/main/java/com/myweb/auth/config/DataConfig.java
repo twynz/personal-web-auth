@@ -37,7 +37,7 @@ public class DataConfig {
 
         sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mybatis/config.xml"));
         //todo it has problem recognizing *, need to check why.
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/**"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/*"));
 
         return sqlSessionFactoryBean.getObject();
     }
