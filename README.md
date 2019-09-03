@@ -8,7 +8,7 @@ should also add your user details in database.
 
 The format to get a token can use this command:
 
-     curl test:test@localhost:10001/oauth/token -d grant_type=password -d username=twy -d password=twy
+     curl test:test@localhost:10001/oauth/token -d grant_type=password -d username=*** -d password=***
 
 You will get a token like this:
      
